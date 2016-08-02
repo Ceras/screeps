@@ -8,8 +8,8 @@ module.exports = {
             return container.id === id;
         })
     },
-    add: function(mineId){
-        this.containers.push(new Container(mineId));
+    add: function(containerId){
+        this.containers.push(new Container(containerId));
     },
     create: function(container){
         var containerData = {
@@ -17,8 +17,13 @@ module.exports = {
             pos: container.pos
         };
 
-
+        Memory.base.containers = Memory.base.containers || {};
         Memory.base.containers[container.id] = containerData;
         this.add(container.id)
+    },
+    getContainerToFill: function(){
+        return _.sortBy(this.containers, function(container){
+            return -container.getFillRate();
+        })[0] || {}
     }
 };

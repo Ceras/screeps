@@ -3,7 +3,7 @@ var transferToSpawn = function(creep){
         creep.moveTo(Game.spawns['Spawn1']);
     }
 };
-var CreepUtility = require('./creepUtility');
+var Base = require('./base');
 var MineCollection = require('./MineCollection');
 
 module.exports = function(creep){
@@ -20,7 +20,10 @@ module.exports = function(creep){
         var goingHome = creep.carryCapacity === creep.carry.energy;
 
         if(goingHome){
-            transferToSpawn(creep);
+            var target = Base.getContainerToFill();
+            if(creep.transfer(target, RESOURCE_ENERGY)) {
+                creep.moveTo(target);
+            }
         } else {
             if(Game.getObjectById(creep.memory.workerAt)){
                 var resourcesOnGround = Game.getObjectById(creep.memory.workerAt).pos.findInRange(FIND_DROPPED_ENERGY, 1);
