@@ -1,3 +1,5 @@
+var Base = require('./base');
+
 module.exports = function(creep){
     return {
         run: function(){
@@ -18,8 +20,8 @@ module.exports = function(creep){
                     creep.moveTo(creep.room.controller);
                 }
             } else {
-                var source = Game.spawns['Spawn1'];
-                if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                var source = Base.getContainerForWithdrawal();
+                if(source && creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source);
                 }
             }

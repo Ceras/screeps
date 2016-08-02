@@ -3,7 +3,7 @@ module.exports = {
     {
       "role": "builder",
       "priority": 2,
-      "amount": 2, //global unit amount
+      "amount": 1, //global unit amount
       "build": [WORK,CARRY,MOVE]
     }, {
       "role": "miner",
@@ -23,7 +23,7 @@ module.exports = {
     },{
       "role": "upgrader",
       "priority": 3,
-      "amount": 0,
+      "amount": 1,
       "build": [WORK,CARRY,MOVE]
     }
   ],

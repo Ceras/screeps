@@ -46,7 +46,20 @@ module.exports = {
             return this.hive.gameSpawn;
         }
 
-        return ContainerCollection.getContainerToFill().gameContainer || this.hive.gameSpawn;
+        return ContainerCollection.getContainersByFillRate('desc')[0].gameContainer || this.hive.gameSpawn;
+    },
+    getContainerForWithdrawal: function(){
+        var validContainers = _.filter(ContainerCollection.getContainersByFillRate('asc'), function(container){
+            return container.allowWithdrawal();
+        });
+
+        if(validContainers.length > 0){
+            return validContainers[0].gameContainer
+        } else if(this.hive.allowWithdrawal()){
+            return this.hive.gameSpawn;
+        }
+
+        return {};
     }
 };
 

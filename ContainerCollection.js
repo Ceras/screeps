@@ -21,9 +21,10 @@ module.exports = {
         Memory.base.containers[container.id] = containerData;
         this.add(container.id)
     },
-    getContainerToFill: function(){
+    getContainersByFillRate: function(direction){
         return _.sortBy(this.containers, function(container){
-            return -container.getFillRate();
-        })[0] || {}
+                var fillRate = container.getFillRate();
+                return direction === 'asc' ? fillRate : -fillRate;
+            }) || [];
     }
 };
