@@ -23,9 +23,8 @@ module.exports.loop = function () {
         deadCreeps = [];
 
     var gameData = new GameData();
-    var creepCollection = new CreepCollection();
     var hive = new Hive(Game.spawns['Spawn1']);
-    var roomsToExplore = [hive.spawn.room.name]; //Object.keys(Game.rooms);
+    var roomsToExplore = [hive.gameSpawn.room.name]; //Object.keys(Game.rooms);
 
     roomsToExplore.forEach(function(roomName){
         if(gameData.roomNotExplored(roomName)){
@@ -46,7 +45,7 @@ module.exports.loop = function () {
                 roles[creep.memory.role](creep, allMines).run();
             }
 
-            creepCollection.addCreep(creep);
+            CreepCollection.addCreep(creep);
         } else {
             deadCreeps.push(creepName);
         }
@@ -65,7 +64,7 @@ module.exports.loop = function () {
 
     // Autobuild units
     GameControllers.units.forEach(function(unitType){
-        var nrOfUnits = creepCollection.getCreepsByRole(unitType.role).length + hive.unitsInQueueByRole(unitType.role);
+        var nrOfUnits = CreepCollection.getCreepsByRole(unitType.role).length + hive.unitsInQueueByRole(unitType.role);
 
         if(nrOfUnits < unitType.amount){
             hive.addAction({actionType: 'build', data: unitType});

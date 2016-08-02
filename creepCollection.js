@@ -1,13 +1,12 @@
-module.exports = function(){
-    this.unitsByType = {};
+module.exports = {
+    unitsByType: {},
 
-    this.addCreep = function(creep){
+    addCreep: function(creep){
         this.unitsByType[creep.memory.role] = this.unitsByType[creep.memory.role] || [];
 
         this.unitsByType[creep.memory.role].push({id: creep.id, name: creep.name, role: creep.memory.role});
-    };
-
-    this.getCreepsByRole = function(role){
+    },
+    getCreepsByRole: function(role){
         return this.unitsByType[role] || [];
     }
 };

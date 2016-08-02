@@ -26,7 +26,7 @@ module.exports = function(creep){
         } else {
             var hive = new Hive(Game.spawns['Spawn1']);
             if(hive.allowWithdrawal() && creep.withdraw(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(hive.spawn);
+                creep.moveTo(hive.gameSpawn);
             }
         }
     };

@@ -1,7 +1,7 @@
 var GameControllers = require('./gameControllers');
 var Hive = require('./hive');
-var Container = require('./container');
 var ContainerCollection = require('./ContainerCollection');
+var CreepCollection = require('./creepCollection');
 //var Extension = require('./extension');
 
 var buildBase = function(room){
@@ -25,7 +25,7 @@ module.exports = {
     init: function(){
         Memory.base = {};
         this.hive = new Hive(Game.spawns['Spawn1']);
-        var room = this.hive.spawn.room;
+        var room = this.hive.gameSpawn.room;
 
         this.findExistingStructures(room);
         buildBase(room);
@@ -42,7 +42,11 @@ module.exports = {
         });
     },
     getContainerToFill: function(){
-        return ContainerCollection.getContainerToFill().gameContainer || Game.spawns['Spawn1'];
+        if(!CreepCollection.unitsByType.maintainer && this.hive.gameSpawn.energy !== 300){
+            return this.hive.gameSpawn;
+        }
+
+        return ContainerCollection.getContainerToFill().gameContainer || this.hive.gameSpawn;
     }
 };
 

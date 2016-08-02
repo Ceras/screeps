@@ -30,7 +30,7 @@ module.exports = function(creep){
                 if(creep.carry.energy == 0 && !isRepairDone(mostBrokenStructure)){
                     var hive = new Hive(Game.spawns['Spawn1']);
                     if(hive.allowWithdrawal() && creep.withdraw(Game.spawns['Spawn1'], RESOURCE_ENERGY, 20) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(hive.spawn);
+                        creep.moveTo(hive.gameSpawn);
                     }
                 }
                 if(creep.repair(mostBrokenStructure) == ERR_NOT_IN_RANGE){

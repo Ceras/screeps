@@ -1,6 +1,6 @@
 module.exports = function(spawn){
     this.id = spawn.id;
-    this.spawn = spawn;
+    this.gameSpawn = spawn;
     this.unitTypesInQueue = {};
 
     this.setDefaultData = function(){
